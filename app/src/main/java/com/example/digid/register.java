@@ -13,7 +13,7 @@ public class register extends AppCompatActivity {
 
     EditText mEmail, mPassword;
     Button mLoginBtn;
-
+    //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
