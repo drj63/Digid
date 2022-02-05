@@ -22,6 +22,11 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this, register.class);
                     startActivity(i);
                 }
+                case R.id.bLogin: {
+
+                    Intent i = new Intent(MainActivity.this, login.class);
+                    startActivity(i);
+                }
             }
         }
     }
