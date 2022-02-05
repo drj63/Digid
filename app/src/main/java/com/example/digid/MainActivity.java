@@ -16,17 +16,16 @@ public class MainActivity extends AppCompatActivity {
 
         public void onButtonClick (View v)
         {
-            switch (v.getId()) {
-                case R.id.bRegister: {
+            if(v.getId()== R.id.bLogin)
+            {
+                Intent i=new Intent(MainActivity.this, login.class );
+                startActivity(i);
+            }
+            if(v.getId()== R.id.bRegister)
+            {
+                Intent i=new Intent(MainActivity.this, register.class );
+                startActivity(i);
 
-                    Intent i = new Intent(MainActivity.this, register.class);
-                    startActivity(i);
-                }
-                case R.id.bLogin: {
-
-                    Intent i = new Intent(MainActivity.this, login.class);
-                    startActivity(i);
-                }
             }
         }
     }
