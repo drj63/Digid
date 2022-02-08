@@ -1,7 +1,9 @@
 package com.example.digid;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -96,6 +98,31 @@ public class register extends AppCompatActivity {
                 Toast.makeText(register.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
+            protected void sendEmail() {
+                Log.i("Send email", "");
+
+                String[] TO = {"someone@gmail.com"};
+                String[] CC = {"xyz@gmail.com"};
+                Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                emailIntent.setData(Uri.parse("mailto:"));
+                emailIntent.setType("text/plain");
+
+
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+
+                try {
+                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                    finish();
+                    Log.i("Finished sending", "");
+
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(register.this,
+                            "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                }
+            }
     });
 
     }
