@@ -57,9 +57,9 @@ public class login extends AppCompatActivity {
                     mEmail.setError("Please Enter A Valid Email!");
                     return;
                 }
-                if(!(email.contains("rutgers.edu")))
+                if(!(email.contains("@scarletmail.rutgers.edu")))
                 {
-                    mEmail.setError("Sorry But This App Is Only For Those Attending Rutgers!");
+                    mEmail.setError("Please Enter A scarletmail.rutgers.edu email!");
                     return;
                 }
                 if(TextUtils.isEmpty(password))

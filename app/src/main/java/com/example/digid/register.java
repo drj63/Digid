@@ -19,6 +19,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Random;
+
 public class register extends AppCompatActivity {
 
     FirebaseAuth fAuth;
@@ -81,6 +83,10 @@ public class register extends AppCompatActivity {
 
             if(task.isSuccessful())
             {
+                Random r = new Random( System.currentTimeMillis() );
+                int iVCODE = 10000 + r.nextInt(20000);
+                String Vcode = String.valueOf(iVCODE);
+
                 Toast.makeText(register.this, "User Created", Toast.LENGTH_SHORT).show();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 User_Parameters userParameters;
@@ -89,9 +95,10 @@ public class register extends AppCompatActivity {
                     userParameters = new User_Parameters();
                     userParameters.setEmail(email);
                     userParameters.setPassword(password);
+                    userParameters.setVcode(Vcode);
                     reff.child(uid).setValue(userParameters);
 
-                    startActivity(new Intent(getApplicationContext(), home.class));
+                    startActivity(new Intent(getApplicationContext(), verify_email.class));
 
             }
             else {
@@ -101,7 +108,7 @@ public class register extends AppCompatActivity {
             protected void sendEmail() {
                 Log.i("Send email", "");
 
-                String[] TO = {"someone@gmail.com"};
+                String[] TO = {email};
                 String[] CC = {"xyz@gmail.com"};
                 Intent emailIntent = new Intent(Intent.ACTION_SEND);
                 emailIntent.setData(Uri.parse("mailto:"));
