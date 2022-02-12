@@ -78,25 +78,33 @@ public class login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            Toast.makeText(login.this, "User Signed In", Toast.LENGTH_SHORT).show();
-                            String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
-                            DatabaseReference reff;
-                            reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
+                            if(fAuth.getCurrentUser().isEmailVerified())
+                            {
 
-                            reff.addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                    Bundle bundle=new Bundle();
-                                    bundle.putString("uid",uid);
-                                }
+                                Toast.makeText(login.this, "User Signed In", Toast.LENGTH_SHORT).show();
+                                String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                DatabaseReference reff;
+                                reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
 
-                                @Override
-                                public void onCancelled(DatabaseError databaseError) {
-                                    System.out.println("The read failed: " + databaseError.getCode());
-                                }
-                            });
+                                reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        Bundle bundle=new Bundle();
+                                        bundle.putString("uid",uid);
+                                    }
 
-                            startActivity(new Intent(getApplicationContext(), home.class));
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        System.out.println("The read failed: " + databaseError.getCode());
+                                    }
+                                });
+                                startActivity(new Intent(getApplicationContext(), home.class));
+                            }
+                            else
+                            {
+                                Toast.makeText(login.this, "Please Verify Your Email!", Toast.LENGTH_SHORT).show();
+
+                            }
 
                         }
 

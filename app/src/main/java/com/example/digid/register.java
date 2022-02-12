@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.ActionCodeSettings;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -30,6 +31,20 @@ public class register extends AppCompatActivity {
     FirebaseAuth fAuth;
     EditText mEmail, mPassword;
     Button mLoginBtn;
+
+    ActionCodeSettings actionCodeSettings =
+            ActionCodeSettings.newBuilder()
+                    // URL you want to redirect back to. The domain (www.example.com) for this
+                    // URL must be whitelisted in the Firebase Console.
+                    .setUrl("https://www.example.com/finishSignUp?cartId=1234")
+                    // This must be true
+                    .setHandleCodeInApp(true)
+                    .setIOSBundleId("com.example.ios")
+                    .setAndroidPackageName(
+                            "com.example.android",
+                            true, /* installIfNotAvailable */
+                            "12"    /* minimumVersion */)
+                    .build();
     //test
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +78,7 @@ public class register extends AppCompatActivity {
                     mEmail.setError("Please Enter A Valid Email!");
                     return;
                 }
-                if(!(email.contains("rutgers.edu")))
+                if(!(email.contains("@scarletmail.rutgers.edu")))
                 {
                     mEmail.setError("Sorry But This App Is Only For Those Attending Rutgers!");
                     return;
@@ -91,7 +106,6 @@ public class register extends AppCompatActivity {
                 int iVCODE = 10000 + r.nextInt(20000);
                 String Vcode = String.valueOf(iVCODE);
 
-                Toast.makeText(register.this, "User Created", Toast.LENGTH_SHORT).show();
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 User_Parameters userParameters;
                     DatabaseReference reff;
@@ -102,18 +116,19 @@ public class register extends AppCompatActivity {
                     userParameters.setVcode(Vcode);
                     reff.child(uid).setValue(userParameters);
 
-                Intent i = new Intent(Intent.ACTION_SEND);
-                i.setType("message/rfc822");
-                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{email});
-                i.putExtra(Intent.EXTRA_SUBJECT, "Verification Code For Digid");
-                i.putExtra(Intent.EXTRA_TEXT   , Vcode );
-                try {
-                    startActivity(Intent.createChooser(i, "Send mail..."));
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(register.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-                }
-                    startActivity(new Intent(getApplicationContext(), verify_email.class));
-
+                fAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if(task.isSuccessful()) {
+                            Toast.makeText(register.this, "Registered successfully! Check Email For Verification Code", Toast.LENGTH_LONG).show();
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                        }
+                        else
+                        {
+                            Toast.makeText(register.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
             }
             else {
                 Toast.makeText(register.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
