@@ -16,8 +16,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
@@ -98,6 +102,16 @@ public class register extends AppCompatActivity {
                     userParameters.setVcode(Vcode);
                     reff.child(uid).setValue(userParameters);
 
+                Intent i = new Intent(Intent.ACTION_SEND);
+                i.setType("message/rfc822");
+                i.putExtra(Intent.EXTRA_EMAIL  , new String[]{email});
+                i.putExtra(Intent.EXTRA_SUBJECT, "Verification Code For Digid");
+                i.putExtra(Intent.EXTRA_TEXT   , Vcode );
+                try {
+                    startActivity(Intent.createChooser(i, "Send mail..."));
+                } catch (android.content.ActivityNotFoundException ex) {
+                    Toast.makeText(register.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                }
                     startActivity(new Intent(getApplicationContext(), verify_email.class));
 
             }
@@ -105,31 +119,50 @@ public class register extends AppCompatActivity {
                 Toast.makeText(register.this, "Error" + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
-            protected void sendEmail() {
-                Log.i("Send email", "");
+            /* protected void sendEmail() {
 
-                String[] TO = {email};
-                String[] CC = {"xyz@gmail.com"};
-                Intent emailIntent = new Intent(Intent.ACTION_SEND);
-                emailIntent.setData(Uri.parse("mailto:"));
-                emailIntent.setType("text/plain");
+                DatabaseReference reff;
+                FirebaseUser currentFirebaseUser = fAuth.getCurrentUser();
+                reff = FirebaseDatabase.getInstance().getReference("User").child(currentFirebaseUser.getUid());
+
+                reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String Vcode = dataSnapshot.child("vcode").getValue().toString();
+                        Log.i("Send email", Vcode);
+                        String[] TO = {email};
+                        String[] CC = {"xyz@spambog.com"};
+                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                        emailIntent.setData(Uri.parse("mailto:"));
+                        emailIntent.setType("text/plain");
 
 
-                emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
-                emailIntent.putExtra(Intent.EXTRA_CC, CC);
-                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Your subject");
-                emailIntent.putExtra(Intent.EXTRA_TEXT, "Email message goes here");
+                        emailIntent.putExtra(Intent.EXTRA_EMAIL, TO);
+                        emailIntent.putExtra(Intent.EXTRA_CC, CC);
+                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Verification code for Digid Is Shown Below");
+                        emailIntent.putExtra(Intent.EXTRA_TEXT, Vcode);
 
-                try {
-                    startActivity(Intent.createChooser(emailIntent, "Send mail..."));
-                    finish();
-                    Log.i("Finished sending", "");
+                        try {
+                            startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                            finish();
+                            Log.i("Finished sending", "");
 
-                } catch (android.content.ActivityNotFoundException ex) {
-                    Toast.makeText(register.this,
-                            "There is no email client installed.", Toast.LENGTH_SHORT).show();
-                }
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(register.this,
+                                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        System.out.println("The read failed: " + databaseError.getCode());
+                    }
+                });
+
+
             }
+
+             */
     });
 
     }

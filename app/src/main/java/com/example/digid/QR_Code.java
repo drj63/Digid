@@ -1,4 +1,4 @@
-package com.example.digid;
+/* package com.example.digid;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -56,3 +56,4 @@ public class QR_Code extends AppCompatActivity{
 
     //
 }
+*/
