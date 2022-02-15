@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Digid">
         <activity
+            android:name=".GenerateQR"
+            android:exported="false" />
+        <activity
             android:name=".locations"
             android:exported="false" />
         <activity
