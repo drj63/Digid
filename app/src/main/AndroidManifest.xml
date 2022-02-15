@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Digid">
         <activity
+            android:name=".locations"
+            android:exported="false" />
+        <activity
+            android:name=".qr_code"
+            android:exported="false" />
+        <activity
             android:name=".verify_email"
             android:exported="false" />
         <activity

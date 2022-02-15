@@ -17,7 +17,7 @@ public class home extends AppCompatActivity {
     {
         if(v.getId()== R.id.bDigitalID)
         {
-            Intent i=new Intent(home.this, qrCode.class );
+            Intent i=new Intent(home.this, qr_code.class );
             startActivity(i);
         }
         if(v.getId()== R.id.bLocations)
