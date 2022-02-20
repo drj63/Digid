@@ -1,7 +1,9 @@
 package com.example.digid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Point;
 import android.os.Bundle;
@@ -14,7 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.zxing.WriterException;
+
+import java.util.Random;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -23,10 +34,14 @@ public class GenerateQR extends AppCompatActivity {
 
     private TextView qrCodeTV;
     private ImageView qrCodeIV;
-    private TextInputEditText dataEDT;
+    //private TextInputEditText dataEDT;
     private Button generateQRbtn;
     private QRGEncoder qrgEncoder;
     private Bitmap bitmap;
+
+    FirebaseAuth fAuth;
+    private Button generateNewQRbtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,35 +49,85 @@ public class GenerateQR extends AppCompatActivity {
         setContentView(R.layout.activity_generate_qr);
         qrCodeTV = findViewById(R.id.idTVGenerateQR);
         qrCodeIV = findViewById(R.id.idIVQRCode);
-        dataEDT = findViewById(R.id.idEdtData);
+        //dataEDT = findViewById(R.id.idEdtData);
         generateQRbtn = findViewById(R.id.idGenButton);
-        generateQRbtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String data = dataEDT.getText().toString();
-                if(data.isEmpty()){
-                    Toast.makeText(GenerateQR.this, "Enter email in scarletmail format to get digital RUID", Toast.LENGTH_SHORT).show();
-                }else{
-                    WindowManager manager =(WindowManager) getSystemService(WINDOW_SERVICE);
-                    Display display = manager.getDefaultDisplay();
-                    Point point = new Point();
-                    display.getSize(point);
-                    int width = point.x;
-                    int height = point.y;
-                    int dimen = width<height ? width:height;
-                    dimen = dimen * 3/4;
+        generateNewQRbtn = findViewById(R.id.bNewButton);
+        fAuth = FirebaseAuth.getInstance();
 
-                    qrgEncoder = new QRGEncoder(dataEDT.getText().toString(),null, QRGContents.Type.TEXT,dimen);
-                    try{
-                        bitmap = qrgEncoder.encodeAsBitmap();
-                        qrCodeTV.setVisibility(View.GONE);
-                        qrCodeIV.setImageBitmap(bitmap);
-                    }catch(WriterException e){
-                        e.printStackTrace();
+
+    }
+    public void onClick(View v) {
+        DatabaseReference reff;
+        FirebaseUser currentFirebaseUser = fAuth.getCurrentUser();
+
+//        if(v.getId() == R.id.bNewButton){
+//
+//            reff = FirebaseDatabase.getInstance().getReference().child("User").child("vcode");
+//            reff.addListenerForSingleValueEvent(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+//                String Vcode;
+//                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+//
+//                User_Parameters userParameters;
+//                userParameters = new User_Parameters();
+//
+//                Random r = new Random(System.currentTimeMillis());
+//                int iVCODE = 10000 + r.nextInt(20000);
+//                Vcode = String.valueOf(iVCODE);
+//
+//                userParameters.setVcode(Vcode);
+//
+//                Toast.makeText(GenerateQR.this, "New ID Generated!", Toast.LENGTH_SHORT).show();
+//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                System.out.println("The read failed: " + databaseError.getCode());
+//            }
+//        });
+//        }
+
+        if(v.getId() == R.id.idGenButton) {
+            reff = FirebaseDatabase.getInstance().getReference("User").child(currentFirebaseUser.getUid());
+            reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String Vcode = dataSnapshot.child("vcode").getValue().toString();
+                    String email = dataSnapshot.child("email").getValue().toString();
+                    Vcode = email.concat("_").concat(Vcode);
+
+                    if (Vcode.isEmpty()) {
+                        Toast.makeText(GenerateQR.this, "Enter email in scarletmail format to get digital RUID", Toast.LENGTH_SHORT).show();
+                    } else {
+                        WindowManager manager = (WindowManager) getSystemService(WINDOW_SERVICE);
+                        Display display = manager.getDefaultDisplay();
+                        Point point = new Point();
+                        display.getSize(point);
+                        int width = point.x;
+                        int height = point.y;
+                        int dimen = width < height ? width : height;
+                        dimen = dimen * 3 / 4;
+
+                        qrgEncoder = new QRGEncoder(Vcode, null, QRGContents.Type.TEXT, dimen);
+                        try {
+                            bitmap = qrgEncoder.encodeAsBitmap();
+                            qrCodeTV.setVisibility(View.GONE);
+                            qrCodeIV.setImageBitmap(bitmap);
+                        } catch (WriterException e) {
+                            e.printStackTrace();
+                        }
+
                     }
-
                 }
-            }
-        });
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
+            //String data = dataEDT.getText().toString();
+        }
     }
 }

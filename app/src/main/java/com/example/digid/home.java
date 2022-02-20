@@ -25,7 +25,7 @@ public class home extends AppCompatActivity {
 
                 @Override
                 public void run() {
-                    Intent i = new Intent(home.this,qr_code.class);
+                    Intent i = new Intent(home.this, GenerateQR.class);
                     startActivity(i);
                     finish();
                 }
