@@ -60,34 +60,31 @@ public class GenerateQR extends AppCompatActivity {
         DatabaseReference reff;
         FirebaseUser currentFirebaseUser = fAuth.getCurrentUser();
 
-//        if(v.getId() == R.id.bNewButton){
-//
-//            reff = FirebaseDatabase.getInstance().getReference().child("User").child("vcode");
-//            reff.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-//                String Vcode;
-//                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//
-//                User_Parameters userParameters;
-//                userParameters = new User_Parameters();
-//
-//                Random r = new Random(System.currentTimeMillis());
-//                int iVCODE = 10000 + r.nextInt(20000);
-//                Vcode = String.valueOf(iVCODE);
-//
-//                userParameters.setVcode(Vcode);
-//
-//                Toast.makeText(GenerateQR.this, "New ID Generated!", Toast.LENGTH_SHORT).show();
-//                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//            }
-//
-//            @Override
-//            public void onCancelled(DatabaseError databaseError) {
-//                System.out.println("The read failed: " + databaseError.getCode());
-//            }
-//        });
-//        }
+        if(v.getId() == R.id.bNewButton){
+
+            reff = FirebaseDatabase.getInstance().getReference().child("User").child(currentFirebaseUser.getUid());
+            reff.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String Vcode;
+
+                Random r = new Random(System.currentTimeMillis());
+                int iVCODE = 10000 + r.nextInt(20000);
+                Vcode = String.valueOf(iVCODE);
+
+                dataSnapshot.child("vcode").getRef().setValue(Vcode);
+
+
+                Toast.makeText(GenerateQR.this, "New ID Generated!", Toast.LENGTH_SHORT).show();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                System.out.println("The read failed: " + databaseError.getCode());
+            }
+        });
+        }
 
         if(v.getId() == R.id.idGenButton) {
             reff = FirebaseDatabase.getInstance().getReference("User").child(currentFirebaseUser.getUid());
