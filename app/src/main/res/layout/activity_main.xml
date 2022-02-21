@@ -10,6 +10,7 @@
 
     <ImageView
         android:id="@+id/imageView6"
+        android:onClick="onButtonClick"
         android:layout_width="117dp"
         android:layout_height="116dp"
         app:layout_constraintBottom_toBottomOf="parent"

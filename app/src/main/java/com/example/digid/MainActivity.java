@@ -16,7 +16,8 @@ import com.google.zxing.common.BitMatrix;
 import com.journeyapps.barcodescanner.BarcodeEncoder; */
 
 public class MainActivity extends AppCompatActivity {
-
+    ImageView img2;
+    int count2 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent i=new Intent(MainActivity.this, register.class );
                 startActivity(i);
 
+            }
+            if(v.getId()== R.id.imageView6)
+            {
+                count2++;
+
+                if (count2 == 5) {
+                    img2 = (ImageView) findViewById(R.id.imageView6);
+                    img2.setImageResource(R.drawable.java);
+                }
             }
         }
     }
