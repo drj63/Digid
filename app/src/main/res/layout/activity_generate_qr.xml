@@ -4,39 +4,40 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#B82121"
     tools:context=".GenerateQR"
-    android:background="@color/black"
 
     >
 
     <FrameLayout
+        android:id="@+id/idFLQrCode"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/idFLQrCode"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="70dp"
 
         >
+
         <TextView
+            android:id="@+id/idTVGenerateQR"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="QR Code for your Digital Rutgers ID"
-            android:textColor="@color/black"
-            android:textAllCaps="false"
-            android:textAlignment="center"
             android:elevation="1dp"
-            android:id="@+id/idTVGenerateQR"
             android:padding="4dp"
-            android:textSize="30sp"/>
+            android:text="QR Code for your Digital Rutgers ID"
+            android:fontFamily="@font/allerdisplay"
+
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/idIVQRCode"
             android:layout_width="250dp"
             android:layout_height="250dp"
-            android:background="#B82121" />
-
-
+            android:background="#FFFFFF" />
 
 
     </FrameLayout>
@@ -55,16 +56,16 @@
         android:textColorHint="@color/white"
         app:hintTextColor="@color/white" />
 
-<!--    <com.google.android.material.textfield.TextInputEditText-->
-<!--        android:id="@+id/idEdtData"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:ems="10"-->
-<!--        android:importantForAutofill="no"-->
-<!--        android:inputType="textImeMultiLine|textMultiLine"-->
-<!--        android:textColor="@color/white"-->
-<!--        android:textColorHint="@color/white"-->
-<!--        android:textSize="15sp" />-->
+    <!--    <com.google.android.material.textfield.TextInputEditText-->
+    <!--        android:id="@+id/idEdtData"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:ems="10"-->
+    <!--        android:importantForAutofill="no"-->
+    <!--        android:inputType="textImeMultiLine|textMultiLine"-->
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textColorHint="@color/white"-->
+    <!--        android:textSize="15sp" />-->
     <Button
         android:id="@+id/idGenButton"
         android:layout_width="match_parent"
@@ -74,11 +75,14 @@
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="#B82121"
+        android:background="@drawable/edit_text_border"
         android:onClick="onClick"
+        android:fontFamily="@font/allerdisplay"
+
         android:text="Generate Digital RUID Code"
         android:textAllCaps="false"
-        android:textColor="@color/black" />
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#000000" />
 
     <Button
         android:id="@+id/bNewButton"
@@ -89,11 +93,14 @@
         android:layout_marginTop="80dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
-        android:background="#B82121"
+        android:background="@drawable/edit_text_border"
         android:onClick="onClick"
+        android:fontFamily="@font/allerdisplay"
+
         android:text="Create New Digital RUID Code"
         android:textAllCaps="false"
-        android:textColor="@color/black" />
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#000000" />
 
 
 </RelativeLayout>
