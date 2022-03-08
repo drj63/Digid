@@ -30,7 +30,7 @@
         android:textColor="@color/black"
         android:textSize="50sp" />
 
-    <ImageView
+    <Button
         android:id="@+id/dh1"
         android:layout_width="1000dp"
         android:layout_height="70dp"
@@ -42,8 +42,12 @@
         android:layout_marginBottom="10dp"
         android:scaleX="1"
         android:scaleY="1"
-        app:backgroundTint="#000000" />
-    <ImageView
+        app:backgroundTint="#000000"
+        android:text="College Avenue Campus Facilities"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        />
+    <Button
         android:id="@+id/dh2"
         android:layout_width="1000dp"
         android:layout_height="70dp"
@@ -55,8 +59,11 @@
         android:layout_marginBottom="10dp"
         android:scaleX="1"
         android:scaleY="1"
-        app:backgroundTint="#000000" />
-    <ImageView
+        app:backgroundTint="#000000"
+        android:text="Busch Campus Facilities"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"/>
+    <Button
         android:id="@+id/g1"
         android:layout_width="1000dp"
         android:layout_height="70dp"
@@ -68,8 +75,11 @@
         android:layout_marginBottom="10dp"
         android:scaleX="1"
         android:scaleY="1"
-        app:backgroundTint="#000000" />
-    <ImageView
+        app:backgroundTint="#000000"
+        android:text="Livingston Campus Facilities"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"/>
+    <Button
         android:id="@+id/g2"
         android:layout_width="1000dp"
         android:layout_height="70dp"
@@ -81,7 +91,10 @@
         android:layout_marginBottom="10dp"
         android:scaleX="1"
         android:scaleY="1"
-        app:backgroundTint="#000000" />
+        app:backgroundTint="#000000"
+        android:text="Cook/Douglass Campus Facilities"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"/>
 
 
 
