@@ -27,7 +27,6 @@
             android:padding="4dp"
             android:text="QR Code for your Digital Rutgers ID"
             android:fontFamily="@font/allerdisplay"
-
             android:textAlignment="center"
             android:textAllCaps="false"
             android:textColor="@color/black"
