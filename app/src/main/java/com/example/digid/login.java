@@ -81,9 +81,10 @@ public class login extends AppCompatActivity {
                             User_Parameters userParameters;
                             DatabaseReference reff;
                             userParameters = new User_Parameters();
-                            if (userParameters.getType().equals("undergraduate"))
-                            {
-                                if(fAuth.getCurrentUser().isEmailVerified()) {
+                            if(fAuth.getCurrentUser().isEmailVerified()) {
+
+                                //if (userParameters.getType().equals("undergraduate"))
+                            //{
                                     Toast.makeText(login.this, "Undergraduate Student Signed In", Toast.LENGTH_SHORT).show();
                                     String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                     reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
@@ -101,7 +102,7 @@ public class login extends AppCompatActivity {
                                         }
                                     });
                                     startActivity(new Intent(getApplicationContext(), home.class));
-                                }
+                                //}
                             }
                             else
                             {
