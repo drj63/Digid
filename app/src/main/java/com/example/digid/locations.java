@@ -28,7 +28,7 @@ public class locations extends AppCompatActivity {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    Intent i = new Intent(locations.this, collegeAve.class);
+                    Intent i = new Intent(locations.this, collegeAveCampus.class);
                     startActivity(i);
                     finish();
                 }
@@ -36,19 +36,19 @@ public class locations extends AppCompatActivity {
         }
         if(v.getId()== R.id.c2)
         {
-            Intent i=new Intent(locations.this, busch.class );
+            Intent i=new Intent(locations.this, buschCampus.class );
             startActivity(i);
 
         }
         if(v.getId()== R.id.c3)
         {
-            Intent i=new Intent(locations.this, livi.class );
+            Intent i=new Intent(locations.this, liviCampus.class );
             startActivity(i);
 
         }
         if(v.getId()== R.id.c4)
         {
-            Intent i=new Intent(locations.this, douglass.class );
+            Intent i=new Intent(locations.this, cookDougCampus.class );
             startActivity(i);
 
         }
