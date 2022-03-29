@@ -78,27 +78,30 @@ public class login extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful())
                         {
-                            if(fAuth.getCurrentUser().isEmailVerified())
+                            User_Parameters userParameters;
+                            DatabaseReference reff;
+                            userParameters = new User_Parameters();
+                            if (userParameters.getType().equals("undergraduate"))
                             {
+                                if(fAuth.getCurrentUser().isEmailVerified()) {
+                                    Toast.makeText(login.this, "Undergraduate Student Signed In", Toast.LENGTH_SHORT).show();
+                                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                    reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
 
-                                Toast.makeText(login.this, "User Signed In", Toast.LENGTH_SHORT).show();
-                                String uid= FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                DatabaseReference reff;
-                                reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
+                                    reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                            Bundle bundle = new Bundle();
+                                            bundle.putString("uid", uid);
+                                        }
 
-                                reff.addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        Bundle bundle=new Bundle();
-                                        bundle.putString("uid",uid);
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-                                        System.out.println("The read failed: " + databaseError.getCode());
-                                    }
-                                });
-                                startActivity(new Intent(getApplicationContext(), home.class));
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+                                            System.out.println("The read failed: " + databaseError.getCode());
+                                        }
+                                    });
+                                    startActivity(new Intent(getApplicationContext(), home.class));
+                                }
                             }
                             else
                             {

@@ -105,6 +105,7 @@ public class register extends AppCompatActivity {
                 Random r = new Random( System.currentTimeMillis() );
                 int iVCODE = 10000 + r.nextInt(20000);
                 String Vcode = String.valueOf(iVCODE);
+                String type = "undergraduate";
 
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 User_Parameters userParameters;
@@ -112,8 +113,9 @@ public class register extends AppCompatActivity {
                     reff = FirebaseDatabase.getInstance().getReference().child("User");
                     userParameters = new User_Parameters();
                     userParameters.setEmail(email);
-                    userParameters.setPassword(password);
+                    userParameters.setType(type);
                     userParameters.setVcode(Vcode);
+
                     reff.child(uid).setValue(userParameters);
 
                 fAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {

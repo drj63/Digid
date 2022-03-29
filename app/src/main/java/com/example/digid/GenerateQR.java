@@ -93,7 +93,7 @@ public class GenerateQR extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String Vcode = dataSnapshot.child("vcode").getValue().toString();
                     String email = dataSnapshot.child("email").getValue().toString();
-                    Vcode = email.concat("_").concat(Vcode);
+                    Vcode = email.concat("_").concat(Vcode); //drj63@scarletmail.rutgers.edu_10824
 
                     if (Vcode.isEmpty()) {
                         Toast.makeText(GenerateQR.this, "Enter email in scarletmail format to get digital RUID", Toast.LENGTH_SHORT).show();
