@@ -10,6 +10,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Digid">
         <activity
+            android:name=".collegeAveCampus"
+            android:exported="false" />
+        <activity
+            android:name=".cookDougCampus"
+            android:exported="false" />
+        <activity
+            android:name=".liviCampus"
+            android:exported="false" />
+        <activity
+            android:name=".buschCampus"
+            android:exported="false" />
+        <activity
             android:name=".GenerateQR"
             android:exported="false" />
         <activity
