@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#B82121"
-    tools:context=".collegeAveCampus">
-
+    tools:context=".CollegeAveScCapacity">
     <FrameLayout
         android:id="@+id/idRefresh"
         android:layout_width="250dp"
@@ -43,7 +42,7 @@
         android:textColor="@color/black"
         android:textSize="20sp" />
     <Button
-        android:id="@+id/sc"
+        android:id="@+id/scPH"
         android:layout_width="1000dp"
         android:layout_height="70dp"
         android:layout_below="@id/inst"
@@ -54,15 +53,15 @@
         android:background="@drawable/edit_text_border"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="College Ave Student Center"
+        android:text="56% Capacity Reached"
         android:textAllCaps="false"
-        android:textColor="#FFFFFF"
+        android:textColor="#3DDC84"
         app:backgroundTint="#000000" />
     <Button
         android:id="@+id/ab"
         android:layout_width="1000dp"
         android:layout_height="70dp"
-        android:layout_below="@id/sc"
+        android:layout_below="@id/scPH"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -106,7 +105,4 @@
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:backgroundTint="#000000" />
-
-
-
 </RelativeLayout>
