@@ -20,9 +20,9 @@
 
     <TextView
         android:id="@+id/tPasswordR"
-        android:fontFamily="@font/allerdisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/allerdisplay"
         android:text="Password:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
@@ -35,9 +35,9 @@
 
     <TextView
         android:id="@+id/tEmailR"
-        android:fontFamily="@font/allerdisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/allerdisplay"
         android:text="Email:"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#FFFFFF"
@@ -86,9 +86,9 @@
 
     <Button
         android:id="@+id/bLoginAttempt"
-        android:fontFamily="@font/allerdisplay"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/allerdisplay"
         android:onClick="onButtonClick"
         android:scaleX="1.5"
         android:scaleY="1.5"
@@ -97,6 +97,25 @@
         app:backgroundTint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.737" />
+
+    <Spinner
+        android:id="@+id/spinner_stype"
+        android:layout_width="312dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="343dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="364dp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.515"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.161" />
 </androidx.constraintlayout.widget.ConstraintLayout>

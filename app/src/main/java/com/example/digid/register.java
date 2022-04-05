@@ -5,8 +5,11 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -26,11 +29,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.Random;
 
-public class register extends AppCompatActivity {
+
+public class register extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
 
     FirebaseAuth fAuth;
     EditText mEmail, mPassword;
     Button mLoginBtn;
+    String selectedstype;
 
     ActionCodeSettings actionCodeSettings =
             ActionCodeSettings.newBuilder()
@@ -50,6 +55,12 @@ public class register extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register);
+
+        Spinner spinner_stype=findViewById(R.id.spinner_stype);
+        ArrayAdapter<CharSequence>adapter=ArrayAdapter.createFromResource(this,R.array.stype, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner_stype.setAdapter(adapter);
+        spinner_stype.setOnItemSelectedListener(this);
 
     }
 
@@ -105,7 +116,6 @@ public class register extends AppCompatActivity {
                 Random r = new Random( System.currentTimeMillis() );
                 int iVCODE = 10000 + r.nextInt(20000);
                 String Vcode = String.valueOf(iVCODE);
-                String type = "undergraduate";
 
                 String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
                 User_Parameters userParameters;
@@ -113,7 +123,24 @@ public class register extends AppCompatActivity {
                     reff = FirebaseDatabase.getInstance().getReference().child("User");
                     userParameters = new User_Parameters();
                     userParameters.setEmail(email);
+
+                    String type = "unknown";
+
+                    if (selectedstype.equals("Graduate Student"))
+                    {
+                        type = "graduate";
+                    }
+                    if (selectedstype.equals("Undergraduate Student"))
+                    {
+                        type = "undergraduate";
+                    }
+                    if (selectedstype.equals("Professor"))
+                    {
+                        type = "professor";
+                    }
+
                     userParameters.setType(type);
+
                     userParameters.setVcode(Vcode);
 
                     reff.child(uid).setValue(userParameters);
@@ -184,5 +211,16 @@ public class register extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        selectedstype = parent.getItemAtPosition(position).toString();
+
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
 }
 

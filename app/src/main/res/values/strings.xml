@@ -2,4 +2,12 @@
 
     <string name="app_name">Digid</string>
 
+    <string-array name="stype">
+        <item>Undergraduate Student</item>
+        <item>Graduate Student</item>
+        <item>Professor</item>
+
+
+    </string-array>
+
 </resources>

@@ -81,28 +81,47 @@ public class login extends AppCompatActivity {
                             User_Parameters userParameters;
                             DatabaseReference reff;
                             userParameters = new User_Parameters();
+
                             if(fAuth.getCurrentUser().isEmailVerified()) {
 
-                                //if (userParameters.getType().equals("undergraduate"))
-                            //{
-                                    Toast.makeText(login.this, "Undergraduate Student Signed In", Toast.LENGTH_SHORT).show();
-                                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                                    reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
 
-                                    reff.addListenerForSingleValueEvent(new ValueEventListener() {
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                            Bundle bundle = new Bundle();
-                                            bundle.putString("uid", uid);
+                                String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                                reff = FirebaseDatabase.getInstance().getReference("User").child(uid);
+
+                                reff.addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        String Usertype = dataSnapshot.child("type").getValue().toString();
+                                        if (Usertype.equals("undergraduate"))
+                                        {
+                                            Toast.makeText(login.this, "Undergraduate Student Signed In", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getApplicationContext(), home.class));
+                                        }
+                                        else if (Usertype.equals("graduate"))
+                                        {
+                                            Toast.makeText(login.this, "Graduate Student Signed In", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getApplicationContext(), home.class));
+                                        }
+                                        else if (Usertype.equals("professor"))
+                                        {
+                                            Toast.makeText(login.this, "Professor Signed In", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getApplicationContext(), home.class));
+                                        }
+                                        else
+                                        {
+                                            Toast.makeText(login.this, "Signed In", Toast.LENGTH_SHORT).show();
+                                            startActivity(new Intent(getApplicationContext(), home.class));
                                         }
 
-                                        @Override
-                                        public void onCancelled(DatabaseError databaseError) {
-                                            System.out.println("The read failed: " + databaseError.getCode());
-                                        }
-                                    });
-                                    startActivity(new Intent(getApplicationContext(), home.class));
-                                //}
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("uid", uid);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(DatabaseError databaseError) {
+                                        System.out.println("The read failed: " + databaseError.getCode());
+                                    }
+                                });
                             }
                             else
                             {
