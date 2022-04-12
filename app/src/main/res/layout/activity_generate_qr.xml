@@ -65,20 +65,21 @@
     <!--        android:textColor="@color/white"-->
     <!--        android:textColorHint="@color/white"-->
     <!--        android:textSize="15sp" />-->
+
     <Button
         android:id="@+id/idGenButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/TILData"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="232dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_text_border"
         android:fontFamily="@font/allerdisplay"
         android:onClick="onClick"
 
-        android:text="Generate Digital RUID Code"
+        android:text="Display Digital RUID Code"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:backgroundTint="#000000" />
@@ -89,14 +90,32 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/TILData"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="22dp"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="10dp"
         android:background="@drawable/edit_text_border"
-        android:onClick="onClick"
         android:fontFamily="@font/allerdisplay"
+        android:onClick="onClick"
 
-        android:text="Create New Digital RUID Code"
+        android:text="Generate New Digital RUID Code"
+        android:textAllCaps="false"
+        android:textColor="#FFFFFF"
+        app:backgroundTint="#000000" />
+
+    <Button
+        android:id="@+id/bNewGuestButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/TILData"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/edit_text_border"
+        android:fontFamily="@font/allerdisplay"
+        android:onClick="onClick"
+
+        android:text="Generate Guest Digital RUID Code"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:backgroundTint="#000000" />

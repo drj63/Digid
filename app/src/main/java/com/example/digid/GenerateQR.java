@@ -41,10 +41,12 @@ public class GenerateQR extends AppCompatActivity {
 
     FirebaseAuth fAuth;
     private Button generateNewQRbtn;
+    int Guest = 0;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_qr);
         qrCodeTV = findViewById(R.id.idTVGenerateQR);
@@ -56,44 +58,55 @@ public class GenerateQR extends AppCompatActivity {
 
 
     }
+
     public void onClick(View v) {
         DatabaseReference reff;
         FirebaseUser currentFirebaseUser = fAuth.getCurrentUser();
 
-        if(v.getId() == R.id.bNewButton){
+        if (v.getId() == R.id.bNewButton) {
 
             reff = FirebaseDatabase.getInstance().getReference().child("User").child(currentFirebaseUser.getUid());
             reff.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String Vcode;
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String Vcode;
 
-                Random r = new Random(System.currentTimeMillis());
-                int iVCODE = 10000 + r.nextInt(20000);
-                Vcode = String.valueOf(iVCODE);
+                    Random r = new Random(System.currentTimeMillis());
+                    int iVCODE = 10000 + r.nextInt(20000);
+                    Vcode = String.valueOf(iVCODE);
 
-                dataSnapshot.child("vcode").getRef().setValue(Vcode);
+                    dataSnapshot.child("vcode").getRef().setValue(Vcode);
 
 
-                Toast.makeText(GenerateQR.this, "New ID Generated!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(GenerateQR.this, "New ID Generated!", Toast.LENGTH_SHORT).show();
 
-            }
+                }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                System.out.println("The read failed: " + databaseError.getCode());
-            }
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("The read failed: " + databaseError.getCode());
+                }
+            });
         }
 
-        if(v.getId() == R.id.idGenButton) {
+        if (v.getId() == R.id.idGenButton) {
             reff = FirebaseDatabase.getInstance().getReference("User").child(currentFirebaseUser.getUid());
             reff.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     String Vcode = dataSnapshot.child("vcode").getValue().toString();
                     String email = dataSnapshot.child("email").getValue().toString();
-                    Vcode = email.concat("_").concat(Vcode); //drj63@scarletmail.rutgers.edu_10824
+
+                    if(Guest == 1)
+                    {
+                        Vcode = email.concat("_").concat(Vcode).concat("_guest"); //drj63@scarletmail.rutgers.edu_10824_guest
+                    }
+                    else
+                    {
+                        Vcode = email.concat("_").concat(Vcode); //drj63@scarletmail.rutgers.edu_10824
+                    }
+                    Guest = 0;
+
 
                     if (Vcode.isEmpty()) {
                         Toast.makeText(GenerateQR.this, "Enter email in scarletmail format to get digital RUID", Toast.LENGTH_SHORT).show();
@@ -124,7 +137,12 @@ public class GenerateQR extends AppCompatActivity {
                     System.out.println("The read failed: " + databaseError.getCode());
                 }
             });
-            //String data = dataEDT.getText().toString();
+        }
+
+        if (v.getId() == R.id.bNewGuestButton) {
+
+                    Guest = 1;
+                    Toast.makeText(GenerateQR.this, "Guest ID Generated!", Toast.LENGTH_SHORT).show();
         }
     }
 }
