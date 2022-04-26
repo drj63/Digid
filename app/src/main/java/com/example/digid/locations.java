@@ -33,9 +33,27 @@ public class locations extends AppCompatActivity {
             }
         });
         busch = (Button) findViewById(R.id.c2);
-        livi = (Button) findViewById(R.id.c3);
-        cook = (Button) findViewById(R.id.c4);
+        busch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openBusch();
+            }
+        });
 
+        livi = (Button) findViewById(R.id.c3);
+        livi.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openLivi();
+            }
+        });
+        cook = (Button) findViewById(R.id.c4);
+        cook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openCook();
+            }
+        });
 
     }
 
@@ -45,8 +63,21 @@ public class locations extends AppCompatActivity {
             startActivity(intent);
 
         }
+        public void openBusch(){
+            Intent intent = new Intent(this, buschCampus.class);
+            startActivity(intent);
 
+        }
+        public void openLivi(){
+            Intent intent = new Intent(this, liviCampus.class);
+            startActivity(intent);
 
+        }
+        public void openCook(){
+            Intent intent = new Intent(this, cookDougCampus.class);
+            startActivity(intent);
+
+        }
 
     }
 

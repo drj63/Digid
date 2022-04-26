@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#B82121"
-    tools:context=".CollegeAveScCapacity">
+    tools:context=".buschsc">
+
     <FrameLayout
         android:id="@+id/idRefresh"
         android:layout_width="250dp"
@@ -22,7 +23,7 @@
         android:elevation="1dp"
         android:fontFamily="@font/allerdisplay"
         android:padding="4dp"
-        android:text="College Ave Facility Capacities:"
+        android:text="Busch Campus Facility Capacities:"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/black"
@@ -41,9 +42,8 @@
         android:textAllCaps="false"
         android:textColor="@color/black"
         android:textSize="20sp" />
-
     <Button
-        android:id="@+id/scPH"
+        android:id="@+id/sc"
         android:layout_width="1000dp"
         android:layout_height="70dp"
         android:layout_below="@id/inst"
@@ -54,15 +54,15 @@
         android:background="@drawable/edit_text_border"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="56% Capacity Reached"
+        android:text="81% Capacity Reached"
         android:textAllCaps="false"
         android:textColor="#3DDC84"
         app:backgroundTint="#000000" />
     <Button
-        android:id="@+id/ab"
+        android:id="@+id/eb"
         android:layout_width="1000dp"
         android:layout_height="70dp"
-        android:layout_below="@id/scPH"
+        android:layout_below="@id/sc"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -70,15 +70,15 @@
         android:background="@drawable/edit_text_border"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="Academic Building"
+        android:text="Engineering Building"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:backgroundTint="#000000" />
     <Button
-        android:id="@+id/brower"
+        android:id="@+id/bdh"
         android:layout_width="1000dp"
         android:layout_height="70dp"
-        android:layout_below="@id/ab"
+        android:layout_below="@id/eb"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -86,7 +86,7 @@
         android:background="@drawable/edit_text_border"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="Brower Dining Hall"
+        android:text="Busch Dining Hall"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:backgroundTint="#000000" />
@@ -94,7 +94,7 @@
         android:id="@+id/gym"
         android:layout_width="1000dp"
         android:layout_height="70dp"
-        android:layout_below="@id/brower"
+        android:layout_below="@id/bdh"
         android:layout_marginStart="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginEnd="20dp"
@@ -102,8 +102,11 @@
         android:background="@drawable/edit_text_border"
         android:scaleX="1"
         android:scaleY="1"
-        android:text="College Avenue Gym"
+        android:text="Werblin Gym"
         android:textAllCaps="false"
         android:textColor="#FFFFFF"
         app:backgroundTint="#000000" />
+
+
+
 </RelativeLayout>

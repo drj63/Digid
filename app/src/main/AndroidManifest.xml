@@ -10,6 +10,41 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Digid">
         <activity
+            android:name=".Werblin"
+            android:exported="false"
+            android:label="@string/title_activity_werblin"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
+            android:name=".bdh"
+            android:exported="false"
+            android:label="@string/title_activity_bdh"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
+            android:name=".engBuilding"
+            android:exported="false"
+            android:label="@string/title_activity_eng_building"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
+            android:name=".buschsc"
+            android:exported="false"
+            android:label="@string/title_activity_buschsc"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
+            android:name=".CAGym"
+            android:exported="false"
+            android:label="@string/title_activity_cagym"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
+            android:name=".brower"
+            android:exported="false"
+            android:label="@string/title_activity_brower"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
+            android:name=".academicbuilding"
+            android:exported="false"
+            android:label="@string/title_activity_academicbuilding"
+            android:theme="@style/Theme.Digid.NoActionBar" />
+        <activity
             android:name=".CollegeAveScCapacity"
             android:exported="false" />
         <activity
